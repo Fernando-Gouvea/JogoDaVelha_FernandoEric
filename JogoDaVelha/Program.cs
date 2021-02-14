@@ -54,7 +54,7 @@ namespace JogoDaVelha
             Console.WriteLine("           Fernando e Eric\n\n");
             Console.ResetColor();
             Console.WriteLine("    Escolha um numero para sua jogada\n\n");
-            for (int i=0; i < 3; i++)
+            for (int i=2; i >= 0; i--)
             {
                 
                 Console.WriteLine("\t+===================+");
