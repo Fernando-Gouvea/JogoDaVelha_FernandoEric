@@ -12,6 +12,8 @@ namespace teste
         {
             string[,] matriz = new string[3, 3];
             int vencedor = 0;
+            string jogador1 = "", jogador2 = "";
+            
             for (int i = 0, valor = 1; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
@@ -20,11 +22,17 @@ namespace teste
                     valor++;
                 }
             }
+            
             imprimir_jogo(matriz);
+           
             Console.WriteLine("\nDigite o nome do/a jogador(a) 1: ");
-            string jogador1 = Console.ReadLine();
+            jogador1 = Console.ReadLine();
+            testaJogador(ref jogador1);
+
             Console.WriteLine("\nDigite o nome do/a jogador(a) 2: ");
-            string jogador2 = Console.ReadLine();
+            jogador2 = Console.ReadLine();
+            testaJogador(ref jogador2);
+
             jogada(matriz, jogador1, jogador2, ref vencedor);
             vencedor = verificaStatus(matriz);
             Console.BackgroundColor = ConsoleColor.Blue;
@@ -40,7 +48,7 @@ namespace teste
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("\n     <<<--Super Jogo da Velha-->>>\n");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("           Fernando e Eric\n\n");
+            Console.WriteLine("                  Fernando \n\n");
             Console.ResetColor();
             Console.WriteLine("    Escolha um numero para sua jogada\n    Para confirmar sua jogada aperte ENTER\n    OBS:");
             Console.WriteLine("    O número a ser digitado para a jogada deve ser inteiro e de 1 até 9!");
@@ -59,6 +67,19 @@ namespace teste
             }
             Console.WriteLine("\t+===================+");
         }
+        static void testaJogador(ref string jogador){
+             while(jogador == "")
+              {
+
+                    Console.WriteLine("ERRO: O nome não pode ser deixado em branco.\nDigite um nome: ");
+                    jogador = Console.ReadLine();
+                 
+              }
+           
+        
+        }
+
+
         static void jogada(string[,] matriz, string jogador1, string jogador2, ref int vencedor)
         {
             bool verifica = false;
@@ -71,17 +92,15 @@ namespace teste
                 {
                     do
                     {
-                        try
-                        {
+                     
                             Console.WriteLine("\nVez do " + jogador1 + "!!!\n");
-                            jogada = int.Parse(Console.ReadLine());
-                            label = "X";
-                            verificaPosicao(matriz, jogada, label, ref verifica);
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("Por favor, digite um valor inteiro de 1 até 9 para a sua jogada!");
-                        }
+                            if (int.TryParse(Console.ReadLine(), out jogada))
+                            {
+                                label = "X";
+                                verificaPosicao(matriz, jogada, label, ref verifica);
+                            }
+                            else Console.WriteLine("Por favor, digite um valor inteiro de 1 até 9 para sua jogada!");
+                        
                     }
                     while ((jogada < 1) || (jogada > 9) || (verifica == false));
                     imprimir_jogo(matriz);
@@ -90,17 +109,17 @@ namespace teste
                 {
                     do
                     {
-                        try
-                        {
+                        
                             Console.WriteLine("\nVez do " + jogador2 + "!!!\n");
-                            jogada = int.Parse(Console.ReadLine());
-                            label = "O";
-                            verificaPosicao(matriz, jogada, label, ref verifica);
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("Por favor, digite um valor inteiro de 1 até 9 para sua jogada!");
-                        }
+                            if (int.TryParse(Console.ReadLine(), out jogada))
+                            {
+                                label = "O";
+                                verificaPosicao(matriz, jogada, label, ref verifica);
+                            }
+                            else Console.WriteLine("Por favor, digite um valor inteiro de 1 até 9 para sua jogada!");
+                      
+                           
+                        
                     }
                     while ((jogada < 1) || (jogada > 9) || (verifica == false));
                     imprimir_jogo(matriz);
