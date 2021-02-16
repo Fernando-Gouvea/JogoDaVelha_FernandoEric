@@ -86,7 +86,6 @@ namespace teste
             {
                 Console.WriteLine("ERRO: O nome não pode ser deixado em branco.\nDigite um nome: ");
                 jogador = Console.ReadLine();
-
             }
         }
         static void jogada(string[,] matriz, string jogador1, string jogador2, ref int vencedor)
@@ -164,7 +163,6 @@ namespace teste
                     else vencedor = 2;
                 }
             }
-
             if ((matriz[0, 0] == matriz[1, 1]) && (matriz[1, 1] == matriz[2, 2]))
             {
                 if (matriz[0, 0] == "X") vencedor = 1;
